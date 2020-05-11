@@ -134,7 +134,7 @@ endif
 " E.g.:
 " call s:HL('Normal', s:palette.fg, s:palette.bg0)
 
-if (has('termguicolors') && &termguicolors) || has('gui_running')  " guifg guibg gui cterm guisp
+if g:termguicolors || g:guirunning
   function! s:HL(group, fg, bg, ...)
     let hl_string = [
           \ 'highlight', a:group,
@@ -291,7 +291,7 @@ call s:HL('Debug', s:palette.yellow, s:palette.none)
 call s:HL('debugPC', s:palette.bg0, s:palette.green)
 call s:HL('debugBreakpoint', s:palette.bg0, s:palette.red)
 call s:HL('ToolbarButton', s:palette.bg0, s:palette.bg_blue)
-if has('nvim')
+if g:editor ==# 'neovim'
   highlight! link healthError Red
   highlight! link healthSuccess Green
   highlight! link healthWarning Yellow
@@ -1838,7 +1838,7 @@ highlight! link agitAuthor Yellow
 " }}}
 " }}}
 " Terminal: {{{
-if (has('termguicolors') && &termguicolors) || has('gui_running')
+if g:termguicolors || g:guirunning
   " Definition
   let s:terminal = {
         \ 'black':    s:palette.black,
@@ -1851,7 +1851,7 @@ if (has('termguicolors') && &termguicolors) || has('gui_running')
         \ 'white':    s:palette.fg
         \ }
   " Implementation: {{{
-  if !has('nvim')
+  if g:editor !=# 'neovim'
     let g:terminal_ansi_colors = [s:terminal.black[0], s:terminal.red[0], s:terminal.green[0], s:terminal.yellow[0],
           \ s:terminal.blue[0], s:terminal.purple[0], s:terminal.cyan[0], s:terminal.white[0], s:terminal.black[0], s:terminal.red[0],
           \ s:terminal.green[0], s:terminal.yellow[0], s:terminal.blue[0], s:terminal.purple[0], s:terminal.cyan[0], s:terminal.white[0]]
